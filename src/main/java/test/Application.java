@@ -6,7 +6,8 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
-import test.service.MyService;
+import test.service.CxfClientService;
+import test.service.StringClientService;
 
 
 @Configuration
@@ -17,9 +18,17 @@ public class Application {
 	public static void main(String[] args) throws Exception {
 		ConfigurableApplicationContext app = SpringApplication.run(Application.class, args);
 		
-		MyService bean = app.getBean(MyService.class);
-		bean.doIt();
+		try {
 		
-		
+			CxfClientService cxfClientService = app.getBean(CxfClientService.class);
+			cxfClientService.logWSAddress();
+
+			StringClientService bean = app.getBean(StringClientService.class);
+			bean.logInjectedStrings();
+			
+			
+		} finally {
+			app.close();
+		}
 	}
 }

@@ -1,5 +1,7 @@
 package test.configuration.support;
 
+import javax.annotation.PostConstruct;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.FactoryBean;
@@ -9,9 +11,9 @@ public class MyFactoryBean
 	implements FactoryBean<Object>
 	{
 
-	Logger logger = LoggerFactory.getLogger(MyFactoryBean.class);
+	protected Logger logger = LoggerFactory.getLogger(this.getClass());
 	
-	private String propertyFromConfig;
+	protected String propertyFromConfig;
 	private String myObject;
 	
 	public String getPropertyFromConfig() {
@@ -34,11 +36,14 @@ public class MyFactoryBean
 		return myObject;
 	}
 
+	@PostConstruct
+	public void init() {
+		logger.info("Initializing ...");
+	}
+	
 	@Override
 	public Class<?> getObjectType() {
-//		return String.class;
-		return CharSequence.class;
-//		return null;  // <=== 
+		return String.class; 
 	}
 
 	@Override
