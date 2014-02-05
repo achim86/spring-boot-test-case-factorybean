@@ -8,8 +8,7 @@ import test.service.CxfClientService;
 
 
 
-@Configuration // DISABLED 
-
+@Configuration
 @ImportResource("classpath:/cxf-applicationContext.xml")
 public class CxfConfig {
 

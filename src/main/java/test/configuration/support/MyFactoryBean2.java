@@ -22,16 +22,16 @@ public class MyFactoryBean2 extends MyFactoryBean {
 		Class<?> res;
 		
 		// simulating a non initialized CXF factory bean : JaxWsProxyFactoryBeanDefinitionParser.JAXWSSpringClientProxyFactoryBean
-		// which return null before serviceClass is injected
+		// which return null before serviceClass value is injected
 		
 //		if(initialized) { // never true ...
-		if(propertyFromConfig != null) {
-			// bean properties has been injected ...
-			res = super.getObjectType();
-		} else {
+		if(propertyFromConfig == null) {
 			// bean properties has NOT been injected yet...
 			// CXF's JaxWsProxyFactoryBeanDefinitionParser.JAXWSSpringClientProxyFactoryBean returns null in this case
 			res = null;  
+		} else {
+			// bean properties has been injected ...
+			res = super.getObjectType();
 		}
 		logger.debug("Returning object type : "+res);
 		return res; 

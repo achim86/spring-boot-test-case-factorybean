@@ -1,5 +1,6 @@
 package test;
 
+import org.apache.cxf.jaxws.spring.JaxWsProxyFactoryBeanDefinitionParser.JAXWSSpringClientProxyFactoryBean;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -25,6 +26,9 @@ public class Application {
 
 			StringClientService bean = app.getBean(StringClientService.class);
 			bean.logInjectedStrings();
+			
+			JAXWSSpringClientProxyFactoryBean factoryBean = app.getBean("&MyWebService",JAXWSSpringClientProxyFactoryBean.class);
+			System.out.println(factoryBean.getAddress());
 			
 			
 		} finally {

@@ -29,8 +29,8 @@ public class StringClientService
 
 	public void logInjectedStrings() {
 		
-		logger.info("Got beanFromFactory  : "+beanFromFactory);
-		logger.info("Got beanFromFactory2 : "+beanFromFactory2);
+		logger.info("injected beanFromFactory  '{}' ",beanFromFactory);
+		logger.info("injected beanFromFactory2 '{}' ",beanFromFactory2);
 		
 	}
 

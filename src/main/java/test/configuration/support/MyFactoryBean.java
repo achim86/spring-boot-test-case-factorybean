@@ -7,8 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.FactoryBean;
 
 public class MyFactoryBean
-//	implements FactoryBean<String>
-	implements FactoryBean<Object>
+	implements FactoryBean<String>
 	{
 
 	protected Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -30,7 +29,7 @@ public class MyFactoryBean
 		if(myObject != null) {
 			logger.info("Returning already created string : "+myObject);
 		} else {
-			myObject = "Got from config : "+propertyFromConfig;
+			myObject = "propertyFromConfig value : "+propertyFromConfig;
 			logger.info("Returning newly created string : "+myObject);
 		}
 		return myObject;
