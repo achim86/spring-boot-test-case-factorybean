@@ -1,0 +1,36 @@
+<wsdl:definitions name="MyWebService" targetNamespace="myservice.acme.com" xmlns:ns1="http://schemas.xmlsoap.org/soap/http"
+  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="myservice.acme.com"
+  xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <wsdl:types>
+      <xs:schema elementFormDefault="unqualified" targetNamespace="myservice.acme.com" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+         <xs:element name="doIt" type="tns:doIt"/>
+         <xs:complexType name="doIt">
+            <xs:sequence>
+               <xs:element form="qualified" minOccurs="0" name="param" type="xs:string"/>
+            </xs:sequence>
+         </xs:complexType>
+      </xs:schema>
+   </wsdl:types>
+   <wsdl:message name="doIt">
+      <wsdl:part element="tns:doIt" name="parameters"/>
+   </wsdl:message>
+   <wsdl:portType name="MyWebService">
+      <wsdl:operation name="doIt">
+         <wsdl:input message="tns:doIt" name="doIt"/>
+      </wsdl:operation>
+   </wsdl:portType>
+   <wsdl:binding name="MyWebServiceSoapBinding" type="tns:MyWebService">
+      <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+      <wsdl:operation name="doIt">
+         <soap:operation soapAction="" style="document"/>
+         <wsdl:input name="doIt">
+            <soap:body use="literal"/>
+         </wsdl:input>
+      </wsdl:operation>
+   </wsdl:binding>
+   <wsdl:service name="MyWebService">
+      <wsdl:port binding="tns:MyWebServiceSoapBinding" name="MuleMyWebServicePort">
+         <soap:address location="http://localhost:8081/services/MyWebService"/>
+      </wsdl:port>
+   </wsdl:service>
+</wsdl:definitions>
